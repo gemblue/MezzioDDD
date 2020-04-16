@@ -24,11 +24,11 @@ class DatabaseTestCase extends TestCase
 
         if (getenv('CI_PAGES_DOMAIN')) {
             shell_exec('php bin/doctrine.php -q orm:schema-tool:create');
-            AnnotationRegistry::registerLoader(
-                function ($className) {
-                    return class_exists($className);
-                }
-            );
+            \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(
+				function ($className) {
+					return class_exists($className);
+				}
+			);
         } else {
             $allowOverride = $container->getAllowOverride();
             $container->setAllowOverride(true);
