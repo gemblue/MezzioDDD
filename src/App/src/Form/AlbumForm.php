@@ -50,15 +50,15 @@ class AlbumForm extends Form implements InputFilterProviderInterface
     {
         return [
             [
-                'name'     => 'artist',
-                'required' => true,
-                'filters'  => [
+                'name'       => 'artist',
+                'required'   => true,
+                'filters'    => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
                 'validators' => [
                     [
-                        'name' => StringLength::class,
+                        'name'    => StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 255,
@@ -67,15 +67,15 @@ class AlbumForm extends Form implements InputFilterProviderInterface
                 ],
             ],
             [
-                'name'     => 'title',
-                'required' => true,
-                'filters'  => [
+                'name'       => 'title',
+                'required'   => true,
+                'filters'    => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
                 'validators' => [
                     [
-                        'name' => StringLength::class,
+                        'name'    => StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 255,

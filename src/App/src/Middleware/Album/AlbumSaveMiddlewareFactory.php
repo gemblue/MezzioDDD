@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
 
 class AlbumSaveMiddlewareFactory
 {
-    public function __invoke(ContainerInterface $container) : AlbumSaveMiddleware
+    public function __invoke(ContainerInterface $container): AlbumSaveMiddleware
     {
         $albumForm       = $container->get('FormElementManager')
                                      ->get(AlbumForm::class);

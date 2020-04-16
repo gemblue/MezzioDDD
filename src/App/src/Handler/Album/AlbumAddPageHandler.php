@@ -19,8 +19,8 @@ class AlbumAddPageHandler implements RequestHandlerInterface
     private $template;
 
     public function __construct(
-        AlbumForm                 $albumForm,
-        AlbumRepository           $albumRepository,
+        AlbumForm $albumForm,
+        AlbumRepository $albumRepository,
         TemplateRendererInterface $template
     ) {
         $this->albumForm       = $albumForm;
@@ -28,7 +28,7 @@ class AlbumAddPageHandler implements RequestHandlerInterface
         $this->template        = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if ($request->getAttribute('albumForm')) {
             $this->albumForm = $request->getAttribute('albumForm');
@@ -36,7 +36,7 @@ class AlbumAddPageHandler implements RequestHandlerInterface
 
         return new HtmlResponse(
             $this->template->render('app::Album/add', [
-                'albumForm' => $this->albumForm,
+                'albumForm'   => $this->albumForm,
                 'uniqueError' => $request->getAttribute('uniqueError') ?? '',
             ])
         );

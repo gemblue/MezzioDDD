@@ -13,12 +13,10 @@ use function json_decode;
 
 class PingHandlerTest extends TestCase
 {
-    //use \Prophecy\PhpUnit\ProphecyTrait;
-
     public function testResponse()
     {
         $pingHandler = new PingHandler();
-        $response = $pingHandler->handle(
+        $response    = $pingHandler->handle(
             $this->prophesize(ServerRequestInterface::class)->reveal()
         );
 

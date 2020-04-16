@@ -20,8 +20,8 @@ class AlbumEditPageHandler implements RequestHandlerInterface
     private $template;
 
     public function __construct(
-        AlbumForm                 $albumForm,
-        AlbumRepository           $albumRepository,
+        AlbumForm $albumForm,
+        AlbumRepository $albumRepository,
         TemplateRendererInterface $template
     ) {
         $this->albumForm       = $albumForm;
@@ -29,7 +29,7 @@ class AlbumEditPageHandler implements RequestHandlerInterface
         $this->template        = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $id = $request->getAttribute('id');
         try {
@@ -46,8 +46,8 @@ class AlbumEditPageHandler implements RequestHandlerInterface
 
         return new HtmlResponse(
             $this->template->render('app::Album/edit', [
-                'id'        => $id,
-                'albumForm' => $this->albumForm,
+                'id'          => $id,
+                'albumForm'   => $this->albumForm,
                 'uniqueError' => $request->getAttribute('uniqueError') ?? '',
             ])
         );

@@ -32,7 +32,7 @@ class AlbumSaveMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $data  = $request->getParsedBody();
+        $data = $request->getParsedBody();
         $this->albumForm->setData($data);
 
         if ($this->albumForm->isValid()) {

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Album;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Album
@@ -13,33 +16,33 @@ use Doctrine\ORM\Mapping as ORM;
 class Album
 {
     /**
-     * @var \Ramsey\Uuid\UuidInterface
-     *
      * @ORM\Id
      * @ORM\Column(type="uuid_binary")
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
+     *
+     * @var UuidInterface
      */
     private $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="artist", type="string", length=255, nullable=false)
+     *
+     * @var string
      */
     private $artist;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     *
+     * @var string
      */
     private $title;
 
     /**
      * Get id
      *
-     * @return \Ramsey\Uuid\UuidInterface
+     * @return UuidInterface
      */
     public function getId()
     {
@@ -50,7 +53,7 @@ class Album
      * Set artist
      *
      * @param string $artist
-     * @return Album
+     * @return $this
      */
     public function setArtist($artist)
     {
@@ -73,7 +76,7 @@ class Album
      * Set title
      *
      * @param string $title
-     * @return Album
+     * @return $this
      */
     public function setTitle($title)
     {

@@ -1,6 +1,6 @@
 cache:
   paths:
-	- vendor/
+    - vendor/
 
 variables:
   MYSQL_ROOT_PASSWORD: "password"
@@ -23,7 +23,7 @@ before_script:
 test:php7.4:
   image: php:7.4
   services:
-	- mariadb
+    - mariadb
   script:
-	- mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb -e "create database mezzio3_crud_test"
-	- vendor/bin/phpunit --coverage-text --colors=never
+    - mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb -e "create database mezzio3_crud_test"
+    - vendor/bin/phpunit --coverage-text --colors=never
