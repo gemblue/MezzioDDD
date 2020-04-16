@@ -1,0 +1,66 @@
+<?php
+
+declare(strict_types=1);
+
+namespace InfrastructureTest\Persistence\Album;
+
+use Domain\Album\Album;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Infrastructure\Persistence\Album\DoctrineAlbumRepository;
+use Prophecy\PhpUnit\ProphecyTrait;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
+
+class DoctrineAlbumRepositoryTest extends TestCase
+{   
+    /*
+    protected $entityManagerStub; // Ganti nama kalau minat..
+    */
+    
+    protected $entityManagerMock;
+    protected $doctrineAlbumRepository;
+
+    // Dummy
+    protected function setUp(): void
+    {
+        $this->entityManagerMock = $this->prophesize(EntityManager::class);
+        $this->doctrineAlbumRepository = new DoctrineAlbumRepository(
+            $this->entityManagerMock->reveal()
+        );
+    }
+
+    // Stubs
+    public function testFindAll()
+    {
+        $objectRepository = $this->prophesize(EntityRepository::class);
+
+        /*
+        $this->entityManagerStub
+             ->getRepository(Album::class)
+             ->willReturn($objectRepository->reveal()); */
+        
+        // Mock ...
+        $this->entityManagerMock
+             ->getRepository(Album::class)
+             ->willReturn($objectRepository->reveal())
+             ->shouldBeCalled(); // Spies ... pastikan object hanya diakses beberapa kali.
+
+        $expected = [
+
+            0 => (function ($album) {
+               $album->id = Uuid::uuid4();
+               $album->artist = 'Siti Nurhaliza';
+			   $album->title = 'Purnama Merindu';
+
+			   return $album;
+            })->bindTo($album = new Album(), Album::class)($album),
+
+        ];
+
+        $objectRepository->findAll()
+                         ->willReturn($expected);
+
+        $this->assertEquals($expected, $this->doctrineAlbumRepository->findAll());
+    }
+}

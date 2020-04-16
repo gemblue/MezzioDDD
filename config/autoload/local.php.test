@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+use Doctrine\DBAL\Driver\PDOMySql\Driver;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Ramsey\Uuid\Doctrine\UuidBinaryType;
+
+return [
+	'doctrine' => [
+		'configuration' => [
+			'orm_default' => [
+				'types' => [
+					UuidBinaryType::NAME => UuidBinaryType::class,
+				],
+			],
+		],
+		'connection' => [
+			'orm_default' => [
+				'driverClass' => Driver::class,
+				'params' => [
+					'host' => 'localhost',
+					'port' => '3306',
+					'user' => 'app',
+					'password' => '12345678',
+					'dbname' => 'mezzio3_crud',
+				],
+			],
+		],
+		'driver' => [
+			'album' => [
+				'class' => AnnotationDriver::class,
+				'paths' => [
+					'src/Domain/Album',
+				],
+			],
+			'orm_default' => [
+				'drivers' => [
+					'Domain\Album' => 'album',
+				],
+			],
+		],
+	],
+];

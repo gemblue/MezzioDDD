@@ -1,0 +1,29 @@
+cache:
+  paths:
+	- vendor/
+
+variables:
+  MYSQL_ROOT_PASSWORD: "password"
+
+before_script:
+  - apt-get update -yqq
+  - apt-get install git -yqq
+  - apt-get install libicu-dev g++ zlib1g-dev libzip-dev unzip mariadb-client -yqq
+  - docker-php-ext-install pdo_mysql
+  - docker-php-ext-configure intl
+  - docker-php-ext-install intl
+  - pecl install pcov
+  - docker-php-ext-enable pcov
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar install --prefer-dist
+  - php composer.phar cs-check
+  - vendor/bin/phpstan analyze --level=5 src/Domain src/Infrastructure
+  - cp config/autoload/local.php.gitlab.test config/autoload/local.php
+
+test:php7.4:
+  image: php:7.4
+  services:
+	- mariadb
+  script:
+	- mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb -e "create database mezzio3_crud_test"
+	- vendor/bin/phpunit --coverage-text --colors=never

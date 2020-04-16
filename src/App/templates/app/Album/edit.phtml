@@ -1,0 +1,12 @@
+<?php $this->headTitle('Edit Album Page'); ?>
+
+<?php
+
+echo $this->uniqueError;
+
+$this->albumForm->setAttributes([
+	'action' => $this->url('album.edit'),
+]);
+
+$this->albumForm->prepare();
+echo $this->form($this->albumForm);
