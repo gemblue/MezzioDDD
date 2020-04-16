@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AppTest;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use PHPUnit\Framework\TestCase;
