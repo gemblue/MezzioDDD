@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AppTest;
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use PHPUnit\Framework\TestCase;
@@ -24,11 +25,11 @@ class DatabaseTestCase extends TestCase
 
         if (getenv('CI_PAGES_DOMAIN')) {
             shell_exec('php bin/doctrine.php -q orm:schema-tool:create');
-            \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(
-				function ($className) {
-					return class_exists($className);
-				}
-			);
+            AnnotationRegistry::registerLoader(
+                function ($className) {
+                    return class_exists($className);
+                }
+            );
         } else {
             $allowOverride = $container->getAllowOverride();
             $container->setAllowOverride(true);
