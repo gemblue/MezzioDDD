@@ -18,3 +18,5 @@ Mezzio is a popular Framework from Zend Framework Team. Formerly Zend Expressive
 - PSR-7 (HTTP Messages)
 - Framework Pipeline
 - ORM with Docrine.
+- Unit Test
+- Gitlab Continous Integration
