@@ -1,6 +1,7 @@
 # Mezzio DDD 
 
 This project was built to learn how to build DDD architecture. Especially in Mezzio Microframework.
+Sorry for the bad commit message Hahaha .. I am too Lazy to write it.
 
 ## What Is DDD
 
