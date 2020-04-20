@@ -1,4 +1,4 @@
-# DDD Implementation in Mezzio Microframework
+# Mezzio DDD 
 
 This project was built to learn how to build DDD architecture. Especially in Mezzio Microframework.
 
